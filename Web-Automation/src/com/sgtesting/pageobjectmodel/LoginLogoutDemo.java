@@ -1,15 +1,14 @@
-package com.sgtesting.tests;
+package com.sgtesting.pageobjectmodel;
 
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LoginLogoutDemo {
-	public static String filename=null;
+
 	public static WebDriver oBrowser=null;
-	public static ObjectMap objmap=null;
+	public static ActiTimePage oPage=null;
 	public static void main(String[] args) {
 		launchBrowser();
 		navigate();
@@ -18,19 +17,13 @@ public class LoginLogoutDemo {
 		logout();
 		closeApp();
 	}
-	
 	private static void launchBrowser()
 	{
 		try
 		{
 			System.setProperty("webdriver.chrome.driver", ".\\Library\\drivers\\chromedriver.exe");
-		//	ChromeOptions options=new ChromeOptions();
-		//	options.addArguments("--start-maximized");
 			oBrowser=new ChromeDriver();
-			String path=System.getProperty("user.dir");
-			System.out.println(path);
-			filename=path+"\\ObjectMap\\objectmap.properties";
-			objmap=new ObjectMap(filename);
+			oPage=new ActiTimePage(oBrowser);
 		}catch(Exception e)
 		{
 			e.printStackTrace();		
@@ -42,7 +35,7 @@ public class LoginLogoutDemo {
 		try
 		{
 			oBrowser.navigate().to("http://localhost/login.do");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 		}catch(Exception e)
 		{
 			e.printStackTrace();		
@@ -53,13 +46,10 @@ public class LoginLogoutDemo {
 	{
 		try
 		{
-			oBrowser.findElement(objmap.getLocator("loginpageusername")).sendKeys("admin");
-			oBrowser.findElement(objmap.getLocator("loginpagepassword")).sendKeys("manager");
-			Thread.sleep(3000);
-			oBrowser.findElement(objmap.getLocator("loginpageloginbtn")).click();
+			oPage.getUsername().sendKeys("admin");
+			oPage.getPwd().sendKeys("manager");
+			oPage.getoLogin().click();
 			Thread.sleep(5000);
-			
-			Thread.sleep(3000);
 		}catch(Exception e)
 		{
 			e.printStackTrace();		
@@ -70,7 +60,7 @@ public class LoginLogoutDemo {
 	{
 		try
 		{
-			oBrowser.findElement(objmap.getLocator("homepageflyoutwin")).click();
+			oPage.getGettingStartedShortcutsPanelId().click();
 			Thread.sleep(2000);
 		}catch(Exception e)
 		{
@@ -82,7 +72,7 @@ public class LoginLogoutDemo {
 	{
 		try
 		{
-			oBrowser.findElement(objmap.getLocator("homepagelogoutlnk")).click();
+			oPage.getoLogout().click();
 			Thread.sleep(2000);
 		}catch(Exception e)
 		{
@@ -95,12 +85,10 @@ public class LoginLogoutDemo {
 		try
 		{
 			oBrowser.quit();
-			Thread.sleep(2000);
 		}catch(Exception e)
 		{
 			e.printStackTrace();		
 		}
 	}
-	
 
 }
