@@ -1,4 +1,4 @@
-package com.sgtesting.objectmap;
+package com.sgtesting.tests;
 
 import java.io.FileInputStream;
 import java.util.Properties;
@@ -6,7 +6,7 @@ import java.util.Properties;
 import org.openqa.selenium.By;
 
 public class ObjectMap {
-	public static Properties prop=null;
+ public static Properties prop=null;
 	public ObjectMap(String filename)
 	{
 		FileInputStream fin=null;
@@ -20,26 +20,26 @@ public class ObjectMap {
 			e.printStackTrace();
 		}
 	}
-
 	public By getLocator(String logicalname)
 	{
 		By by=null;
 		try
 		{
 			String locatordetail=prop.getProperty(logicalname);
+		//	System.out.println(locatordetail);
 			String locator[]=locatordetail.split(",");
 			String locatorname=locator[0];
 			String locatorvalue=locator[1];
-			switch (locatorname.toLowerCase()) {
+			switch(locatorname.toLowerCase()) {
 			case "id":
-				by=By.id(locatorvalue);
-				break;
+			by=By.id(locatorvalue);
+			break;
 			case "name":
 				by=By.name(locatorvalue);
 				break;
 			case "xpath":
-				by=By.xpath(locatorvalue);
-				break;
+			 by=By.xpath(locatorvalue);
+			 break;
 			case "tagname":
 				by=By.tagName(locatorvalue);
 				break;
@@ -52,14 +52,13 @@ public class ObjectMap {
 			case "classname":
 				by=By.className(locatorvalue);
 				break;
-			default:
-				System.out.println("Invalid Locator Name!!!!");
+				default:
+					System.out.println("Invalid Locator Name!!!");
 			}
-			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return by;
+	return by;
 	}
 }

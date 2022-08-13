@@ -1,9 +1,10 @@
-package com.sgtesting.objectmap;
+package com.sgtesting.tests;
 
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LoginLogoutDemo {
 	public static String filename=null;
@@ -23,6 +24,8 @@ public class LoginLogoutDemo {
 		try
 		{
 			System.setProperty("webdriver.chrome.driver", ".\\Library\\drivers\\chromedriver.exe");
+		//	ChromeOptions options=new ChromeOptions();
+		//	options.addArguments("--start-maximized");
 			oBrowser=new ChromeDriver();
 			String path=System.getProperty("user.dir");
 			System.out.println(path);
@@ -52,8 +55,11 @@ public class LoginLogoutDemo {
 		{
 			oBrowser.findElement(objmap.getLocator("loginpageusername")).sendKeys("admin");
 			oBrowser.findElement(objmap.getLocator("loginpagepassword")).sendKeys("manager");
+			Thread.sleep(3000);
 			oBrowser.findElement(objmap.getLocator("loginpageloginbtn")).click();
 			Thread.sleep(5000);
+			
+			Thread.sleep(3000);
 		}catch(Exception e)
 		{
 			e.printStackTrace();		

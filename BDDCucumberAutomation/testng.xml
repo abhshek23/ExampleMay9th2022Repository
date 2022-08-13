@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="cucumber">
+  <test name="scenario">
+    <classes>
+      <class name="com.sgtesting.actitime.testsuit.DriverScript"></class>
+    </classes>
+  </test>
+</suite>
